@@ -1,9 +1,3 @@
 node_modules/
 dist/
 .env
-.idea/
-.vscode/
-.build/
-temp/
-tmp/*
-!tmp/.gitkeep
