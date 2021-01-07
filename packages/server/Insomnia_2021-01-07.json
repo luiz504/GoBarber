@@ -1,0 +1,135 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2021-01-07T14:51:42.474Z",
+  "__export_source": "insomnia.desktop.app:v2020.5.2",
+  "resources": [
+    {
+      "_id": "req_84cc93bf946745eb8521f98d94d5885e",
+      "parentId": "fld_8840ad9429104c8eb8278688eb55c7bc",
+      "modified": 1610031000521,
+      "created": 1609965893296,
+      "url": "{{ _.base_url }}/appointments",
+      "name": "create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"provider\":  \"luiz\",\n\t\"date\": \"{% now 'iso-8601', '' %}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_6625edba29464e5db5d52b97da42015e"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1609965893297,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_8840ad9429104c8eb8278688eb55c7bc",
+      "parentId": "fld_30c14911596b487896d3093189fd8358",
+      "modified": 1609965878234,
+      "created": 1609965878234,
+      "name": "Appointments",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1609965878235,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_30c14911596b487896d3093189fd8358",
+      "parentId": "wrk_50fe181d0cb4484dbd2a264d95248cec",
+      "modified": 1609959061602,
+      "created": 1609959053796,
+      "name": "GoBarber",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1609959053796,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_50fe181d0cb4484dbd2a264d95248cec",
+      "parentId": null,
+      "modified": 1594638820983,
+      "created": 1594638820983,
+      "name": "AINDA",
+      "description": "",
+      "scope": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_2bcfd9b1e7f62568abf64bdb44999b70d11a1026",
+      "parentId": "wrk_50fe181d0cb4484dbd2a264d95248cec",
+      "modified": 1594638821298,
+      "created": 1594638821298,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1594638821298,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_2bcfd9b1e7f62568abf64bdb44999b70d11a1026",
+      "parentId": "wrk_50fe181d0cb4484dbd2a264d95248cec",
+      "modified": 1594638821306,
+      "created": 1594638821306,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_d9a8dbbfdf8e49e2b726bcc787abeefd",
+      "parentId": "wrk_50fe181d0cb4484dbd2a264d95248cec",
+      "modified": 1594638820987,
+      "created": 1594638820987,
+      "fileName": "AINDA",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_8cd5b9bf82c04e85b4aebb51b20cdcfe",
+      "parentId": "env_2bcfd9b1e7f62568abf64bdb44999b70d11a1026",
+      "modified": 1599138566311,
+      "created": 1594638950406,
+      "name": "Dev Stage Ainda",
+      "data": {
+        "api_base_url": "https://stage.aindastudio.com/ainda",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImVlNzZkMzRjOGVhYWU2YmFmZDNkNjg4YjVmMDJkYjU3Y2I5MDkyMGVmNjhiZjZmODU0NDE0MDNiYzc4ZDA2YzI3ZTFmODNiNjA5NWJlNzdlIn0.eyJhdWQiOiIxIiwianRpIjoiZWU3NmQzNGM4ZWFhZTZiYWZkM2Q2ODhiNWYwMmRiNTdjYjkwOTIwZWY2OGJmNmY4NTQ0MTQwM2JjNzhkMDZjMjdlMWY4M2I2MDk1YmU3N2UiLCJpYXQiOjE1OTkxMzg1NDksIm5iZiI6MTU5OTEzODU0OSwiZXhwIjoxNjMwNjc0NTQ5LCJzdWIiOiIyNzQiLCJzY29wZXMiOltdfQ.Un1cU58-rTumoxuW6x901AD255L9jRKFvrMuzCu-Q6ljSl3jGUkN1I7k_ShEi5iY1dPgSz_wxK9R0jPIXkm_ynOrUZPXbIy8tXR6f2QEP4SZCwjubGYXKJMQifhzogLojqlN_x1LP-FDfE_HiJ6CAs1uh4BRX0NgyCkNdJnAjhoXZ5ads48E3aYP-Vg3P9yy7aQhiEPRcDknoWrzqmjvMRf4sp_6M2Ev_KPg6zhx51G6FYXzQPdJ9WGe0XOl9vQZL2x1ldWnC6qN08X_d1C7QmQzkwDDpHKzeheYCEltSjGlts4xBnBlFvl_g1WHkwaPEKY-aHgIRZf0-b8oWU482GQt4PyYIVjNGWDOk6w748nz-zUiiif3GaYrTGUod49E6goSAimQ7r2qxjHtP7JCoKTfVTcKll8SCSE8LG5PFjaUwygHWqkfI6fUMZaoNnpiP5rPkVN72YsBSmgQMOs_fPM1cV7e5QIGpsL5C-B4VtLjkqnCow9L1rJHUKCt86gSonT5Pr4-7M1ZMttyyU4H8SixRWuYfGuJ7eVgHJdUXb757oKReXIo1E5pYP5v7nTSjrWpyj_cwea_0N8EJnDADwipSX5Sb9_VM10wVOERs1Ebbvj0hIUVAT-9tj64Hnx2ECRVl6fsyy4foRTirIdOTb1L5kPkmBGWKivd_OdDtFo"
+      },
+      "dataPropertyOrder": { "&": ["api_base_url", "token"] },
+      "color": "#0dda2a",
+      "isPrivate": false,
+      "metaSortKey": 1594638950406,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_3e82e59113404644afeccdd69ef279ce",
+      "parentId": "env_2bcfd9b1e7f62568abf64bdb44999b70d11a1026",
+      "modified": 1609965989639,
+      "created": 1609965912213,
+      "name": "GoBarber - dev",
+      "data": { "base_url": "http://localhost:3333" },
+      "dataPropertyOrder": { "&": ["base_url"] },
+      "color": "#2e06f4",
+      "isPrivate": false,
+      "metaSortKey": 1609965912213,
+      "_type": "environment"
+    }
+  ]
+}

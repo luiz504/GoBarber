@@ -3,14 +3,24 @@ import { v4 } from 'uuid';
 
 const appointmentsRouter = Router();
 
-appointmentsRouter.post(`/`, (request, response) => {
-  const { provider, date } = request.body;
-  const user = {
-    provider,
-    date,
-    id: v4(),
-  };
-  return response.json(user);
+const appoinments = [];
+
+appointmentsRouter.post('/', (request, response) => {
+  try {
+    const { provider, date } = request.body;
+
+    const appoinment = {
+      provider,
+      date,
+      id: v4(),
+    };
+
+    appoinments.push(appoinment);
+
+    return response.json(appoinment);
+  } catch (err) {
+    return response.status(400).json(err.message);
+  }
 });
 
 export default appointmentsRouter;
