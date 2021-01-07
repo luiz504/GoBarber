@@ -32,7 +32,10 @@ appointmentsRouter.post('/', (request, response) => {
         .json({ message: ' This Hour is already booked' });
     }
 
-    const appoinment = appointmentsRepository.create(provider, parsedDate);
+    const appoinment = appointmentsRepository.create({
+      provider,
+      date: parsedDate,
+    });
 
     return response.json(appoinment);
   } catch (err) {
