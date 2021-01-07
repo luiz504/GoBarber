@@ -1,7 +1,4 @@
 node_modules/
+yarn-error.log
 .env
-.idea/
 
-.build/
-temp/
-tmp/*
