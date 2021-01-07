@@ -5,21 +5,14 @@
   "author": "l.bueno <luiz504@hotmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "scripts": {
     "lint": "yarn lint-staged"
   },
-  "husky": {"hooks": {
-    "pre-commit": "yarn lint"
-
-
-
-  }} ,
-
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
   "lint-staged": {
     "**/*.+(ts|tsx|js)": [
       "eslint --fix --max-warnings 0",
