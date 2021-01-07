@@ -5,6 +5,11 @@
   "author": "l.bueno <luiz504@hotmail.com>",
   "license": "MIT",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "scripts": {
     "lint": "yarn lint-staged"
   },
@@ -22,14 +27,14 @@
       "prettier --write"
     ]
   },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "@gobarber/eslint-config": "*",
     "@types/uuid": "^8.3.0",
     "husky": "^4.3.7",
     "lint-staged": "^10.5.3",
     "typescript": "^4.1.3"
-  },
-  "dependencies": {
-    "uuid": "^8.3.2"
   }
 }
