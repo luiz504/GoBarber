@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "main": "server.ts",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "tsc",
     "start": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules  src/server.ts"
   },
+  "workspaces": {
+    "nohoist": [
+      "typeorm/**",
+      "typeorm"
+    ]
+  },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "typeorm": "^0.2.29"
   },
   "devDependencies": {
     "@types/cors": "^2.8.9",
