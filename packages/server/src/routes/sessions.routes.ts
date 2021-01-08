@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import AppError from '../errors/AppError';
 import AuthenticateUserService from '../services/AuthenticateUser.service';
 
 const sessionsRouter = Router();
@@ -20,7 +21,7 @@ sessionsRouter.post('/', async (request, response) => {
       token,
     });
   } catch (err) {
-    return response.status(400).json(err.message);
+    return response.status(err.statusCode).json({ error: err.message });
   }
 });
 
