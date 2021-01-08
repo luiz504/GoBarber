@@ -11,7 +11,8 @@
     ]
   },
   "scripts": {
-    "lint": "yarn lint-staged"
+    "lint": "lint-staged",
+    "postinstall": "husky install"
   },
   "husky": {
     "hooks": {
