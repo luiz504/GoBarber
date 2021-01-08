@@ -2,7 +2,10 @@ import multer from 'multer';
 import path from 'path';
 import crypto from 'crypto';
 
+const tempFolder = path.resolve(__dirname, '..', '..', 'temp');
+
 const uploadConfig = {
+  directory: tempFolder,
   storage: multer.diskStorage({
     destination: path.resolve(__dirname, '..', '..', 'temp'),
     filename(request, file, callback) {
