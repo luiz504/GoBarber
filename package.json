@@ -11,8 +11,7 @@
     ]
   },
   "scripts": {
-    "lint": "lint-staged",
-    "postinstall": "husky install"
+    "lint": "lint-staged"
   },
   "husky": {
     "hooks": {

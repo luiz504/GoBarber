@@ -31,9 +31,13 @@
     "camelcase": "off",
     "@typescript-eslint/ban-types": "off",
     "class-methods-use-this": "off",
-    "@typescript-eslint/no-unused-vars": ["error", {
-      "argsIgnorePattern": "_"
-    }],
+
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -42,7 +46,9 @@
         "tsx": "never"
       }
     ],
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-use-before-define": [0],
+    "@typescript-eslint/no-use-before-define": [1]
   },
   "settings": {
     "import/resolver": {
