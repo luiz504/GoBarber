@@ -1,3 +1,4 @@
+import { hash } from 'bcryptjs';
 import { getRepository } from 'typeorm';
 
 import User from '../models/User';
@@ -9,7 +10,11 @@ interface IRequest {
 }
 
 class CreateUserService {
-  public async execute({ name, email, password }: IRequest): Promise<User> {
+  public async execute({
+    name,
+    email,
+    password,
+  }: IRequest): Promise<Omit<User, 'password'>> {
     const usersRepository = getRepository(User);
 
     const findUserExists = await usersRepository.findOne({ where: { email } });
@@ -18,10 +23,12 @@ class CreateUserService {
       throw Error('Email Already in use');
     }
 
+    const hashedPassword = await hash(password, 8);
+
     const user = usersRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     await usersRepository.save(user);
