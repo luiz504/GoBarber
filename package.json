@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "date-fns": "^2.16.1",
+    "styled-components": "^5.2.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
