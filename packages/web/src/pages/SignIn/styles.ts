@@ -30,40 +30,6 @@ export const FormSection = styled.div`
       margin-bottom: 24px;
     }
 
-    input {
-      width: 100%;
-      padding: 16px;
-      border-radius: 10px;
-      border: 2px solid #232129;
-      color: ${colors['off-white']};
-      background: ${colors.secondary};
-
-      &::placeholder {
-        color: ${colors.placeholder};
-      }
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      height: 56px;
-      width: 100%;
-      padding: 0 16px;
-      margin-top: 16px;
-      border-radius: 10px;
-      color: ${colors.primary};
-      background-color: ${colors.terceary};
-
-      font-weight: 500;
-      transition: background-color 150ms ease;
-
-      &:hover {
-        background-color: ${shade(0.1, colors.terceary)};
-      }
-    }
-
     a {
       margin-top: 24px;
 
