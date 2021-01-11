@@ -29,7 +29,7 @@ const SignIn: React.FC = () => {
           <Link to="/forgot"> Forgot password</Link>
         </form>
 
-        <Link to="/signup">
+        <Link to="/sign-up">
           <FiLogIn />
           Create Account
         </Link>
