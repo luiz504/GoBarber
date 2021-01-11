@@ -1,20 +1,26 @@
-import React from 'react';
-import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
-
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { WrapperSignIn, FormSection, BgImg } from './styles';
+import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
+import { Form } from '@unform/web';
+
 import logo from '../../assets/logo.svg';
 
 import Input from '../../components/Input/input';
 import Button from '../../components/Button';
 
+import { WrapperSignIn, FormSection, BgImg } from './styles';
+
 const SignIn: React.FC = () => {
+  const handleSubmit = useCallback(() => {
+    console.log('hello');
+  }, []);
+
   return (
     <WrapperSignIn>
       <FormSection>
         <img src={logo} alt="GoBarber" />
 
-        <form>
+        <Form onSubmit={handleSubmit}>
           <h1> Sign In</h1>
           <Input name="email" icon={FiMail} placeholder="E-mail" />
           <Input
@@ -27,7 +33,7 @@ const SignIn: React.FC = () => {
           <Button type="submit"> Join</Button>
 
           <Link to="/forgot"> Forgot password</Link>
-        </form>
+        </Form>
 
         <Link to="/sign-up">
           <FiLogIn />
