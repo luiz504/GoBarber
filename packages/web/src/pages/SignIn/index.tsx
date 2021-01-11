@@ -1,8 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
-import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
+
+import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
 
@@ -10,12 +12,28 @@ import Input from '../../components/Input/input';
 import Button from '../../components/Button';
 
 import { WrapperSignIn, FormSection, BgImg } from './styles';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(() => {
-    console.log('hello'); // eslint-disable-line
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .email('You must provide a valid E-mail.')
+          .required('E-mail is required.'),
+        password: Yup.string().required('Password is required.'),
+      });
+
+      await schema.validate(data, { abortEarly: false });
+    } catch (error) {
+      const errors = getValidationErrors(error);
+
+      formRef.current?.setErrors(errors);
+    }
   }, []);
 
   return (

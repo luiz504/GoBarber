@@ -23,19 +23,25 @@ const SignUp: React.FC = () => {
 
       const schema = Yup.object().shape({
         name: Yup.string().required(),
-        email: Yup.string().email().required(),
-        confirmEmail: Yup.string().email().required(),
-        password: Yup.string().min(6),
+        email: Yup.string()
+          .email('You must provide a valid E-mail.')
+          .required('E-mail is required.'),
+        confirmEmail: Yup.string()
+          .email('You must provide a valid E-mail.')
+          .required('Confirm E-mail is required.')
+          .oneOf([Yup.ref('email')], 'E-mails must be the same.'),
+        password: Yup.string()
+          .min(6, 'Password must be at least 6 characters.')
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+            'Password must be at leat 6 characters, one uppercase, one lowercase and one number',
+          ),
         confirmPassword: Yup.string()
-          .min(6)
-          .required('You must confirm your password'),
+          .required('You must confirm your password.')
+          .oneOf([Yup.ref('password')], 'Passwords must be the same.'),
       });
 
       await schema.validate(data, { abortEarly: false });
-
-      formRef.current?.setErrors({
-        name: 'naomm',
-      });
     } catch (error) {
       const errors = getValidationErrors(error);
 
