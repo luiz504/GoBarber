@@ -14,6 +14,7 @@ interface ISignInCredentials {
 interface IAuthContext {
   user: object;
   signIn(credentials: ISignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -40,11 +41,18 @@ const AuthProvider: React.FC = ({ children }) => {
 
       setData({ token, user });
     } catch (err) {
-      setData({ token: ``, user: {} });
+      setData({} as IAuthState);
     }
   }, []);
+
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoBarber:token');
+    localStorage.removeItem('@GoBarber:user');
+
+    setData({} as IAuthState);
+  }, []);
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
@@ -54,7 +62,7 @@ function useAuthContenxt(): IAuthContext {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('You must use this hooks inside the Authcontext Provider');
+    throw new Error('You must use this hooks inside the AuthProvider');
   }
 
   return context;

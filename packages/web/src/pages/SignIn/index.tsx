@@ -13,7 +13,7 @@ import Button from '../../components/Button';
 
 import { WrapperSignIn, FormSection, BgImg } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
-import { useAuthContenxt } from '../../context/AuthContext';
+import { useAuthContenxt } from '../../hooks/AuthContext';
 
 interface IFormData {
   email: string;

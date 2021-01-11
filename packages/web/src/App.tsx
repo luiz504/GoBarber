@@ -4,13 +4,13 @@ import GlobalStyles from './styles/global';
 
 import Routes from './routes';
 
-import { AuthProvider } from './context/AuthContext';
+import Provider from './hooks';
 
 const App: React.FC = () => (
   <BrowserRouter>
-    <AuthProvider>
+    <Provider>
       <Routes />
-    </AuthProvider>
+    </Provider>
     <GlobalStyles />
   </BrowserRouter>
 );
