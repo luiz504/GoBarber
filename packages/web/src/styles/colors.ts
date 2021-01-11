@@ -5,4 +5,5 @@ export default {
   white: '#FFF',
   'off-white': '#f4EDE8',
   placeholder: '#666360',
+  danger: '#c53030',
 };

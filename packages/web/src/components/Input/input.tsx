@@ -9,8 +9,9 @@ import React, {
 } from 'react';
 
 import { IconBaseProps } from 'react-icons';
+import { FiAlertCircle } from 'react-icons/fi';
 
-import { WrapperInput } from './styles';
+import { WrapperInput, InputError } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -40,7 +41,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <WrapperInput isFocused={isFocused} isFilled={isFilled}>
+    <WrapperInput isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
       {Icon && <Icon />}
 
       <input
@@ -51,7 +52,12 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
       />
-      {error}
+
+      {error && (
+        <InputError title={error}>
+          <FiAlertCircle />
+        </InputError>
+      )}
     </WrapperInput>
   );
 };

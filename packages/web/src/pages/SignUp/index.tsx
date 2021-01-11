@@ -24,7 +24,7 @@ const SignUp: React.FC = () => {
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().email().required(),
-        confirmemail: Yup.string().email().required(),
+        confirmEmail: Yup.string().email().required(),
         password: Yup.string().min(6),
         confirmPassword: Yup.string()
           .min(6)

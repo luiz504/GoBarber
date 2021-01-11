@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components';
 import colors from '../../styles/colors';
 
+import Tooltip from '../Tooltip';
+
 interface WrapperInputProps {
   isFocused: boolean;
   isFilled: boolean;
+  isErrored: boolean;
 }
 
 export const WrapperInput = styled.div<WrapperInputProps>`
@@ -23,6 +26,12 @@ export const WrapperInput = styled.div<WrapperInputProps>`
   }
 
   ${props =>
+    props.isErrored &&
+    css`
+      border-color: ${colors.danger};
+    `}
+
+  ${props =>
     props.isFocused &&
     css`
       color: ${colors.terceary};
@@ -35,6 +44,8 @@ export const WrapperInput = styled.div<WrapperInputProps>`
       color: ${colors.terceary};
     `}
 
+
+
   input {
     flex: 1;
     border: 0;
@@ -46,7 +57,18 @@ export const WrapperInput = styled.div<WrapperInputProps>`
     }
   }
 
-  svg {
+  > svg {
     margin-right: 16px;
+  }
+`;
+
+export const InputError = styled(Tooltip)`
+  span {
+    background: ${colors.danger};
+    color: ${colors.white};
+
+    &::before {
+      border-color: ${colors.danger} transparent;
+    }
   }
 `;
