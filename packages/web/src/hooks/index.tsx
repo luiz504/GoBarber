@@ -1,10 +1,13 @@
 import React from 'react';
 import { AuthProvider } from './AuthContext';
+import { ToastProvider } from './ToastContext';
 
-// import { Container } from './styles';
-
-const Provider: React.FC = ({ children }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+const AppProvider: React.FC = ({ children }) => {
+  return (
+    <AuthProvider>
+      <ToastProvider>{children}</ToastProvider>
+    </AuthProvider>
+  );
 };
 
-export default Provider;
+export default AppProvider;
