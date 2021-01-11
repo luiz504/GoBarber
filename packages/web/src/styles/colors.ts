@@ -5,5 +5,10 @@ export default {
   white: '#FFF',
   'off-white': '#f4EDE8',
   placeholder: '#666360',
+  info: '#3172b7',
+  infobg: '#ebf9ff',
+  success: '#2e656a',
+  successbg: '#e6fffa',
   danger: '#c53030',
+  dangerbg: '#fddede',
 };
