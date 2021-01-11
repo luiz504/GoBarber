@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
@@ -11,9 +12,15 @@ import Button from '../../components/Button';
 
 import { WrapperSignUp, FormSection, BgImg } from './styles';
 
+import getValidationErrors from '../../utils/getValidationErrors';
+
 const SignUp: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+
   const handleSubmit = useCallback(async (data: object) => {
     try {
+      formRef.current?.setErrors({});
+
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().email().required(),
@@ -25,8 +32,14 @@ const SignUp: React.FC = () => {
       });
 
       await schema.validate(data, { abortEarly: false });
+
+      formRef.current?.setErrors({
+        name: 'naomm',
+      });
     } catch (error) {
-      console.log(`err`, error);//eslint-disable-line
+      const errors = getValidationErrors(error);
+
+      formRef.current?.setErrors(errors);
     }
   }, []);
   return (
@@ -36,7 +49,7 @@ const SignUp: React.FC = () => {
       <FormSection>
         <img src={logo} alt="GoBarber" />
 
-        <Form onSubmit={handleSubmit} autoComplete="off">
+        <Form ref={formRef} onSubmit={handleSubmit} autoComplete="off">
           <h1> Sign Up</h1>
 
           <Input

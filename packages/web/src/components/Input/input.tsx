@@ -51,6 +51,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
       />
+      {error}
     </WrapperInput>
   );
 };

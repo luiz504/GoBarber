@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { FormHandles } from '@unform/core';
 import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
 
@@ -11,8 +12,10 @@ import Button from '../../components/Button';
 import { WrapperSignIn, FormSection, BgImg } from './styles';
 
 const SignIn: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+
   const handleSubmit = useCallback(() => {
-    console.log('hello');
+    console.log('hello'); // eslint-disable-line
   }, []);
 
   return (
@@ -20,7 +23,7 @@ const SignIn: React.FC = () => {
       <FormSection>
         <img src={logo} alt="GoBarber" />
 
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <h1> Sign In</h1>
           <Input name="email" icon={FiMail} placeholder="E-mail" />
           <Input
