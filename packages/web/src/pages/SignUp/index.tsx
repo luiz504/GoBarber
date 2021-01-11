@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
+import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
 
@@ -11,8 +12,22 @@ import Button from '../../components/Button';
 import { WrapperSignUp, FormSection, BgImg } from './styles';
 
 const SignUp: React.FC = () => {
-  const handleSubmit = useCallback((data: object) => {
-    console.log('hello', data);
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required(),
+        email: Yup.string().email().required(),
+        confirmemail: Yup.string().email().required(),
+        password: Yup.string().min(6),
+        confirmPassword: Yup.string()
+          .min(6)
+          .required('You must confirm your password'),
+      });
+
+      await schema.validate(data, { abortEarly: false });
+    } catch (error) {
+      console.log(`err`, error);//eslint-disable-line
+    }
   }, []);
   return (
     <WrapperSignUp>
@@ -39,7 +54,7 @@ const SignUp: React.FC = () => {
           />
 
           <Input
-            name="email"
+            name="confirmEmail"
             icon={FiMail}
             placeholder="Confirm E-mail"
             autoComplete="new-password"
@@ -55,7 +70,7 @@ const SignUp: React.FC = () => {
           />
 
           <Input
-            name="confirm-password"
+            name="confirmPassword"
             icon={FiLock}
             type="password"
             placeholder="Confirm password"
