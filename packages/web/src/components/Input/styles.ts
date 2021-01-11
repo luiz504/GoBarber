@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from '../../styles/colors';
 
-export const WrapperInput = styled.div`
+interface WrapperInputProps {
+  isFocused: boolean;
+  isFilled: boolean;
+}
+
+export const WrapperInput = styled.div<WrapperInputProps>`
   width: 100%;
   padding: 16px;
   border-radius: 10px;
@@ -16,6 +21,19 @@ export const WrapperInput = styled.div`
   & + div {
     margin-top: 8px;
   }
+
+  ${props =>
+    props.isFocused &&
+    css`
+      color: ${colors.terceary};
+      border-color: ${colors.terceary};
+    `}
+
+  ${props =>
+    props.isFilled &&
+    css`
+      color: ${colors.terceary};
+    `}
 
   input {
     flex: 1;
