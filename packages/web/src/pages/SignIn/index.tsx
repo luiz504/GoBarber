@@ -53,7 +53,7 @@ const SignIn: React.FC = () => {
           formRef.current?.setErrors(errors);
         }
 
-        addToast({ title: 'hello', description: ' error', type: `error` });
+        addToast({ title: 'hello', description: ' error', type: 'success' });
         // trigger a toast
       }
     },
