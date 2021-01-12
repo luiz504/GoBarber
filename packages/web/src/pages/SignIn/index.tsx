@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 import getValidationErrors from '../../utils/getValidationErrors';
-import { useAuthContenxt } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 import { useToast } from '../../hooks/ToastContext';
 
 interface IFormData {
@@ -30,7 +30,7 @@ interface IFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useAuthContenxt();
+  const { signIn } = useAuth();
   const { addToast } = useToast();
 
   const handleSubmit = useCallback(

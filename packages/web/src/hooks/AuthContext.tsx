@@ -54,7 +54,7 @@ const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-function useAuthContenxt(): IAuthContext {
+function useAuth(): IAuthContext {
   const context = useContext(AuthContext);
 
   if (!context) {
@@ -64,4 +64,4 @@ function useAuthContenxt(): IAuthContext {
   return context;
 }
 
-export { AuthProvider, useAuthContenxt };
+export { AuthProvider, useAuth };
