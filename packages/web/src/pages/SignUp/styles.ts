@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { shade } from 'polished';
 
@@ -17,9 +17,26 @@ export const FormSection = styled.div`
   max-width: 700px;
 
   display: flex;
+  justify-content: center;
+`;
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  } to  {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const AnimatedFormSection = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  animation: ${appearFromRight} 500ms ease-in-out;
 
   form {
     width: 340px;

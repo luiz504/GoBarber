@@ -10,7 +10,12 @@ import logo from '../../assets/logo.svg';
 import Input from '../../components/Input/input';
 import Button from '../../components/Button';
 
-import { WrapperSignUp, FormSection, BgImg } from './styles';
+import {
+  WrapperSignUp,
+  FormSection,
+  AnimatedFormSection,
+  BgImg,
+} from './styles';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -53,57 +58,59 @@ const SignUp: React.FC = () => {
       <BgImg />
 
       <FormSection>
-        <img src={logo} alt="GoBarber" />
+        <AnimatedFormSection>
+          <img src={logo} alt="GoBarber" />
 
-        <Form ref={formRef} onSubmit={handleSubmit} autoComplete="off">
-          <h1> Sign Up</h1>
+          <Form ref={formRef} onSubmit={handleSubmit} autoComplete="off">
+            <h1> Sign Up</h1>
 
-          <Input
-            name="name"
-            icon={FiUser}
-            placeholder="Name"
-            autoComplete="new-password"
-          />
+            <Input
+              name="name"
+              icon={FiUser}
+              placeholder="Name"
+              autoComplete="new-password"
+            />
 
-          <Input
-            name="email"
-            icon={FiMail}
-            placeholder="E-mail"
-            autoComplete="new-password"
-          />
+            <Input
+              name="email"
+              icon={FiMail}
+              placeholder="E-mail"
+              autoComplete="new-password"
+            />
 
-          <Input
-            name="confirmEmail"
-            icon={FiMail}
-            placeholder="Confirm E-mail"
-            autoComplete="new-password"
-            onPaste={event => event.preventDefault()}
-          />
+            <Input
+              name="confirmEmail"
+              icon={FiMail}
+              placeholder="Confirm E-mail"
+              autoComplete="new-password"
+              onPaste={event => event.preventDefault()}
+            />
 
-          <Input
-            name="password"
-            icon={FiLock}
-            type="password"
-            autoComplete="new-password"
-            placeholder="Password"
-          />
+            <Input
+              name="password"
+              icon={FiLock}
+              type="password"
+              autoComplete="new-password"
+              placeholder="Password"
+            />
 
-          <Input
-            name="confirmPassword"
-            icon={FiLock}
-            type="password"
-            placeholder="Confirm password"
-            autoComplete="new-password"
-            onPaste={event => event.preventDefault()}
-          />
+            <Input
+              name="confirmPassword"
+              icon={FiLock}
+              type="password"
+              placeholder="Confirm password"
+              autoComplete="new-password"
+              onPaste={event => event.preventDefault()}
+            />
 
-          <Button type="submit"> Join</Button>
-        </Form>
+            <Button type="submit"> Join</Button>
+          </Form>
 
-        <Link to="/">
-          <FiArrowLeft />
-          Return to Sign In
-        </Link>
+          <Link to="/">
+            <FiArrowLeft />
+            Return to Sign In
+          </Link>
+        </AnimatedFormSection>
       </FormSection>
     </WrapperSignUp>
   );

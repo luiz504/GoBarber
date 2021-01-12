@@ -11,7 +11,12 @@ import logo from '../../assets/logo.svg';
 import Input from '../../components/Input/input';
 import Button from '../../components/Button';
 
-import { WrapperSignIn, FormSection, BgImg } from './styles';
+import {
+  WrapperSignIn,
+  FormSection,
+  AnimatedFormSection,
+  BgImg,
+} from './styles';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useAuthContenxt } from '../../hooks/AuthContext';
@@ -51,6 +56,7 @@ const SignIn: React.FC = () => {
           const errors = getValidationErrors(err);
 
           formRef.current?.setErrors(errors);
+          return;
         }
 
         addToast({ title: 'hello', description: ' error', type: 'success' });
@@ -63,27 +69,29 @@ const SignIn: React.FC = () => {
   return (
     <WrapperSignIn>
       <FormSection>
-        <img src={logo} alt="GoBarber" />
+        <AnimatedFormSection>
+          <img src={logo} alt="GoBarber" />
 
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1> Sign In</h1>
-          <Input name="email" icon={FiMail} placeholder="E-mail" />
-          <Input
-            name="password"
-            icon={FiLock}
-            type="password"
-            placeholder="Password"
-          />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <h1> Sign In</h1>
+            <Input name="email" icon={FiMail} placeholder="E-mail" />
+            <Input
+              name="password"
+              icon={FiLock}
+              type="password"
+              placeholder="Password"
+            />
 
-          <Button type="submit"> Join</Button>
+            <Button type="submit"> Join</Button>
 
-          <Link to="/forgot"> Forgot password</Link>
-        </Form>
+            <Link to="/forgot"> Forgot password</Link>
+          </Form>
 
-        <Link to="/sign-up">
-          <FiLogIn />
-          Create Account
-        </Link>
+          <Link to="/sign-up">
+            <FiLogIn />
+            Create Account
+          </Link>
+        </AnimatedFormSection>
       </FormSection>
       <BgImg />
     </WrapperSignIn>
