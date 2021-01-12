@@ -59,8 +59,11 @@ const SignIn: React.FC = () => {
           return;
         }
 
-        addToast({ title: 'hello', description: ' error', type: 'success' });
-        // trigger a toast
+        addToast({
+          type: 'error',
+          title: 'Unespected Error',
+          description: 'Check your data or try again late',
+        });
       }
     },
     [signIn, addToast],
