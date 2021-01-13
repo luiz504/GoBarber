@@ -11,8 +11,10 @@
     ]
   },
   "scripts": {
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "postinstall": "npx husky install"
   },
+
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint"
@@ -33,7 +35,8 @@
     "date-fns": "^2.16.1",
     "styled-components": "^5.2.1",
     "uuid": "^8.3.2",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "react-native": "*"
   },
   "devDependencies": {
     "@gobarber/eslint-config": "*",
