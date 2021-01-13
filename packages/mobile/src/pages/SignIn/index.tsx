@@ -1,12 +1,15 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
 
-import { WrapperSignIn } from './styles';
+import logo from '../../assets/logo.png';
+
+import { WrapperSignIn, Title } from './styles';
 
 const SignIn: React.FC = () => {
   return (
     <WrapperSignIn>
-      <Text> SignIn </Text>
+      <Image source={logo} />
+      <Title> SignIn </Title>
     </WrapperSignIn>
   );
 };

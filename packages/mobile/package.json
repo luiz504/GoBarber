@@ -25,6 +25,8 @@
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
     "@types/react-test-renderer": "^16.9.2",
+    "@types/styled-components": "^5.1.7",
+    "@types/styled-components-react-native": "^5.1.0",
     "babel-jest": "^25.1.0",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
