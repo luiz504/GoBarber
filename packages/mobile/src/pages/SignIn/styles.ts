@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { Platform } from 'react-native';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -8,7 +9,7 @@ import fonts from '../../styles/fonts';
 
 export const WrapperSignIn = styled.View`
   flex: 1;
-  padding: 0 30px;
+  padding: 0 30px ${Platform.OS === 'android' ? 140 : 40}px;
 
   align-items: center;
   justify-content: center;

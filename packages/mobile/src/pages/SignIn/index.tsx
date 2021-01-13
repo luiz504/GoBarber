@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
 import {
   Image,
   KeyboardAvoidingView,
   ScrollView,
   Platform,
   View,
-  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import logo from '../../assets/logo.png';
+import useKeyboadUtils from '../../hooks/keyboad';
 import colors from '../../styles/colors';
 
 import {
@@ -23,21 +24,9 @@ import {
 } from './styles';
 
 const SignIn: React.FC = () => {
-  const [isOpenKeyboad, setIsOpenKeyboad] = useState(false);
+  const { isOpenKeyboard } = useKeyboadUtils();
+  const navigation = useNavigation();
 
-  const handleKeyboard = useCallback((value: boolean) => {
-    setIsOpenKeyboad(value);
-  }, []);
-
-  useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', () => handleKeyboard(true));
-    Keyboard.addListener('keyboardDidHide', () => handleKeyboard(false));
-
-    return () => {
-      Keyboard.removeListener('keyboardDidShow', () => handleKeyboard(false));
-      Keyboard.removeListener('keyboardDidHide', () => handleKeyboard(false));
-    };
-  }, [handleKeyboard]);
   return (
     <>
       <KeyboardAvoidingView
@@ -46,16 +35,17 @@ const SignIn: React.FC = () => {
         enabled
       >
         <ScrollView
-          contentContainerStyle={{ flex: 1 }}
           keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ minHeight: '100%' }}
         >
           <WrapperSignIn>
             <Image source={logo} />
             <View>
-              <Title> SignIn </Title>
+              <Title> Sign In </Title>
             </View>
 
             <InputField name="mail" icon="mail" placeholder="E-mail" />
+
             <InputField name="password" icon="lock" placeholder="Password" />
 
             <BtnSubmit
@@ -76,8 +66,9 @@ const SignIn: React.FC = () => {
           </WrapperSignIn>
         </ScrollView>
       </KeyboardAvoidingView>
-      {!isOpenKeyboad && (
-        <BtnSignUp>
+
+      {!isOpenKeyboard && (
+        <BtnSignUp onPress={() => navigation.navigate('SignUp')}>
           <Icon name="log-in" size={20} color={colors.terceary} />
           <TextSignUp>Sign Up</TextSignUp>
         </BtnSignUp>
