@@ -1,5 +1,6 @@
+import React, { useCallback, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+
 import {
   Image,
   KeyboardAvoidingView,
@@ -7,10 +8,13 @@ import {
   Platform,
   View,
 } from 'react-native';
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 import Icon from 'react-native-vector-icons/Feather';
+
 import logo from '../../assets/logo.png';
-import useKeyboadUtils from '../../hooks/keyboad';
 import colors from '../../styles/colors';
+import { IInputRef } from '../../components/Input';
 
 import {
   WrapperSignIn,
@@ -23,9 +27,48 @@ import {
   TextSignUp,
 } from './styles';
 
+import useKeyboadUtils from '../../hooks/keyboad';
+
+interface IFormData {
+  email: string;
+  password: string;
+}
+
 const SignIn: React.FC = () => {
   const { isOpenKeyboard } = useKeyboadUtils();
   const navigation = useNavigation();
+
+  const formRef = useRef<FormHandles>(null);
+  const pwInputRef = useRef<IInputRef>(null);
+
+  const handleSubmit = useCallback(async (data: IFormData) => {
+    console.log(`form`, data); //eslint-disable-line
+    // try {
+    //   formRef.current?.setErrors({});
+    //   const schema = Yup.object().shape({
+    //     email: Yup.string()
+    //       .email('You must provide a valid E-mail.')
+    //       .required('E-mail is required.'),
+    //     password: Yup.string().required('Password is required.'),
+    //   });
+    //   await schema.validate(data, { abortEarly: false });
+    //   await signIn({
+    //     email: data.email,
+    //     password: data.password,
+    //   });
+    // } catch (err) {
+    //   if (err instanceof Yup.ValidationError) {
+    //     const errors = getValidationErrors(err);
+    //     formRef.current?.setErrors(errors);
+    //     return;
+    //   }
+    //   addToast({
+    //     type: 'error',
+    //     title: 'Unespected Error',
+    //     description: 'Check your data or try again late',
+    //   });
+    // }
+  }, []);
 
   return (
     <>
@@ -44,13 +87,36 @@ const SignIn: React.FC = () => {
               <Title> Sign In </Title>
             </View>
 
-            <InputField name="mail" icon="mail" placeholder="E-mail" />
+            <Form ref={formRef} onSubmit={handleSubmit}>
+              <InputField
+                name="mail"
+                icon="mail"
+                placeholder="E-mail"
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  pwInputRef.current.focus();
+                }}
+              />
 
-            <InputField name="password" icon="lock" placeholder="Password" />
+              <InputField
+                ref={pwInputRef}
+                name="password"
+                icon="lock"
+                placeholder="Password"
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={() => {
+                  formRef.current?.submitForm();
+                }}
+              />
+            </Form>
 
             <BtnSubmit
               onPress={() => {
-                console.log(`join`); //eslint-disable-line
+                formRef.current?.submitForm();
               }}
             >
               Join
