@@ -3,7 +3,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
+
 import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
+
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import logo from '../../assets/logo.svg';
 
@@ -17,7 +20,6 @@ import {
   BgImg,
 } from './styles';
 
-import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 import { useToast } from '../../hooks/ToastContext';
 

@@ -4,6 +4,8 @@ import React, {
   useRef,
   useImperativeHandle,
   forwardRef,
+  useState,
+  useCallback,
 } from 'react';
 import { Text, TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
@@ -28,10 +30,23 @@ const Input: React.ForwardRefRenderFunction<IInputRef, IInputProps> = (
   { name, icon, style, ...rest },
   ref,
 ) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
   const { registerField, defaultValue = '', fieldName, error } = useField(name);
 
   const inputValueRef = useRef<InputValueRef>({ value: defaultValue });
   const inputElementRef = useRef(null);
+
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleInputBlue = useCallback(() => {
+    setIsFocused(false);
+
+    setIsFilled(!!inputValueRef.current.value);
+  }, []);
 
   useImperativeHandle(ref, () => ({
     focus() {
@@ -57,20 +72,31 @@ const Input: React.ForwardRefRenderFunction<IInputRef, IInputProps> = (
   }, [registerField, fieldName]);
 
   return (
-    <WrapperInput style={style}>
-      {icon && <Icon name={icon} size={20} color={colors.placeholder} />}
+    <>
+      <WrapperInput style={style} isFocused={isFocused} isErrored={!!error}>
+        {icon && (
+          <Icon
+            name={icon}
+            size={20}
+            color={isFocused || isFilled ? colors.terceary : colors.placeholder}
+          />
+        )}
 
-      <InputField
-        ref={inputElementRef}
-        keyboardAppearance="dark"
-        placeholderTextColor={colors.placeholder}
-        onChangeText={value => {
-          inputValueRef.current.value = value;
-        }}
-        {...rest}
-      />
-      {error && <Text>{error}</Text>}
-    </WrapperInput>
+        <InputField
+          ref={inputElementRef}
+          keyboardAppearance="dark"
+          placeholderTextColor={colors.placeholder}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlue}
+          onChangeText={value => {
+            inputValueRef.current.value = value;
+          }}
+          {...rest}
+        />
+
+        {error && <Text style={{ color: 'red' }}>{error}</Text>}
+      </WrapperInput>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
 
 import {
   Image,
@@ -7,10 +8,13 @@ import {
   ScrollView,
   Platform,
   View,
+  Alert,
 } from 'react-native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import Icon from 'react-native-vector-icons/Feather';
+
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import logo from '../../assets/logo.png';
 import colors from '../../styles/colors';
@@ -43,31 +47,30 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = useCallback(async (data: IFormData) => {
     console.log(`form`, data); //eslint-disable-line
-    // try {
-    //   formRef.current?.setErrors({});
-    //   const schema = Yup.object().shape({
-    //     email: Yup.string()
-    //       .email('You must provide a valid E-mail.')
-    //       .required('E-mail is required.'),
-    //     password: Yup.string().required('Password is required.'),
-    //   });
-    //   await schema.validate(data, { abortEarly: false });
-    //   await signIn({
-    //     email: data.email,
-    //     password: data.password,
-    //   });
-    // } catch (err) {
-    //   if (err instanceof Yup.ValidationError) {
-    //     const errors = getValidationErrors(err);
-    //     formRef.current?.setErrors(errors);
-    //     return;
-    //   }
-    //   addToast({
-    //     type: 'error',
-    //     title: 'Unespected Error',
-    //     description: 'Check your data or try again late',
-    //   });
-    // }
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .email('You must provide a valid E-mail.')
+          .required('E-mail is required.'),
+        password: Yup.string().required('Password is required.'),
+      });
+
+      await schema.validate(data, { abortEarly: false });
+      // await signIn({
+      //   email: data.email,
+      //   password: data.password,
+      // });
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+        formRef.current?.setErrors(errors);
+        return;
+      }
+
+      Alert.alert('Unespected Error', 'Check your data or try again later.');
+    }
   }, []);
 
   return (
@@ -89,7 +92,7 @@ const SignIn: React.FC = () => {
 
             <Form ref={formRef} onSubmit={handleSubmit}>
               <InputField
-                name="mail"
+                name="email"
                 icon="mail"
                 placeholder="E-mail"
                 autoCorrect={false}

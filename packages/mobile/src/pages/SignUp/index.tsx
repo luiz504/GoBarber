@@ -6,9 +6,12 @@ import {
   ScrollView,
   Platform,
   View,
+  Alert,
 } from 'react-native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
+
 import Icon from 'react-native-vector-icons/Feather';
 
 import logo from '../../assets/logo.png';
@@ -25,6 +28,7 @@ import {
 } from './styles';
 
 import useKeyboadUtils from '../../hooks/keyboad';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 interface IFormData {
   name: string;
@@ -45,59 +49,49 @@ const SignUp: React.FC = () => {
   const confirmPwInputRef = useRef<IInputRef>(null);
 
   const handleSubmit = useCallback(async (data: IFormData) => {
-    console.log('form', data); //eslint-disable-line
-    // try {
-    //   formRef.current?.setErrors({});
+    try {
+      formRef.current?.setErrors({});
 
-    //   const schema = Yup.object().shape({
-    //     name: Yup.string().required(),
-    //     email: Yup.string()
-    //       .email('You must provide a valid E-mail.')
-    //       .required('E-mail is required.'),
-    //     confirmEmail: Yup.string()
-    //       .email('You must provide a valid E-mail.')
-    //       .required('Confirm E-mail is required.')
-    //       .oneOf([Yup.ref('email')], 'E-mails must be the same.'),
-    //     password: Yup.string()
-    //       .min(6, 'Password must be at least 6 characters.')
-    //       .matches(
-    //         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
-    //         'Password must be at leat 6 characters, one uppercase, one lowercase and one number',
-    //       ),
-    //     confirmPassword: Yup.string()
-    //       .required('You must confirm your password.')
-    //       .oneOf([Yup.ref('password')], 'Passwords must be the same.'),
-    //   });
+      const schema = Yup.object().shape({
+        name: Yup.string().required(),
+        email: Yup.string()
+          .email('You must provide a valid E-mail.')
+          .required('E-mail is required.'),
+        confirmEmail: Yup.string()
+          .email('You must provide a valid E-mail.')
+          .required('Confirm E-mail is required.')
+          .oneOf([Yup.ref('email')], 'E-mails must be the same.'),
+        password: Yup.string()
+          .min(6, 'Password must be at least 6 characters.')
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+            'Password must be at leat 6 characters, one uppercase, one lowercase and one number',
+          ),
+        confirmPassword: Yup.string()
+          .required('You must confirm your password.')
+          .oneOf([Yup.ref('password')], 'Passwords must be the same.'),
+      });
 
-    //   await schema.validate(data, { abortEarly: false });
+      await schema.validate(data, { abortEarly: false });
 
-    //   await api.post('/users', {
-    //     name: data.name,
-    //     email: data.email,
-    //     password: data.password,
-    //   });
+      // await api.post('/users', {
+      //   name: data.name,
+      //   email: data.email,
+      //   password: data.password,
+      // });
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
 
-    //   addToast({
-    //     type: 'success',
-    //     title: 'Account Created!',
-    //     description: 'Check your e-mail to validate your account.',
-    //   });
+        formRef.current?.setErrors(errors);
+        return;
+      }
 
-    //   history.push('/');
-    // } catch (err) {
-    //   if (err instanceof Yup.ValidationError) {
-    //     const errors = getValidationErrors(err);
-
-    //     formRef.current?.setErrors(errors);
-    //     return;
-    //   }
-
-    //   addToast({
-    //     type: 'error',
-    //     title: 'Unespected Error',
-    //     description: 'Something went wrong :( try again late',
-    //   });
-    // }
+      Alert.alert(
+        'Unespected Error',
+        'Something went wrong :( try again later.',
+      );
+    }
   }, []);
 
   return (
@@ -131,7 +125,7 @@ const SignUp: React.FC = () => {
 
               <InputField
                 ref={emailInputRef}
-                name="mail"
+                name="email"
                 icon="mail"
                 placeholder="E-mail"
                 keyboardType="email-address"
