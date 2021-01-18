@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 
 import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
 
+import getValidationErrors from '../../utils/getValidationErrors';
+
 import logo from '../../assets/logo.svg';
 
 import Input from '../../components/Input/input';
@@ -18,7 +20,6 @@ import {
   BgImg,
 } from './styles';
 
-import getValidationErrors from '../../utils/getValidationErrors';
 import { useAuth } from '../../hooks/AuthContext';
 import { useToast } from '../../hooks/ToastContext';
 
