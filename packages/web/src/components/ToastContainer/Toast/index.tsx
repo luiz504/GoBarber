@@ -36,7 +36,7 @@ const Toast: React.FC<IToastProps> = ({ message, style }) => {
     <ToastWrapper
       key={message.id}
       type={message.type}
-      hasDescription={!!message.description}
+      hasdescript={message.description ? 1 : 0}
       style={style}
     >
       {iconByType[message.type || 'info']}
