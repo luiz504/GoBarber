@@ -4,6 +4,8 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
+import api from '@gobarber/axios-config';
+
 import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -20,7 +22,6 @@ import {
   BgImg,
 } from './styles';
 
-import api from '../../services/api';
 import { useToast } from '../../hooks/ToastContext';
 
 interface IFormData {

@@ -11,6 +11,7 @@ import {
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import { apiMobile } from '@gobarber/axios-config';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -26,7 +27,6 @@ import {
   BtnSignIn,
   TextSignIn,
 } from './styles';
-
 import useKeyboadUtils from '../../hooks/keyboad';
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -48,51 +48,57 @@ const SignUp: React.FC = () => {
   const pwInputRef = useRef<IInputRef>(null);
   const confirmPwInputRef = useRef<IInputRef>(null);
 
-  const handleSubmit = useCallback(async (data: IFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: IFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required(),
-        email: Yup.string()
-          .email('You must provide a valid E-mail.')
-          .required('E-mail is required.'),
-        confirmEmail: Yup.string()
-          .email('You must provide a valid E-mail.')
-          .required('Confirm E-mail is required.')
-          .oneOf([Yup.ref('email')], 'E-mails must be the same.'),
-        password: Yup.string()
-          .min(6, 'Password must be at least 6 characters.')
-          .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
-            'Password must be at leat 6 characters, one uppercase, one lowercase and one number',
-          ),
-        confirmPassword: Yup.string()
-          .required('You must confirm your password.')
-          .oneOf([Yup.ref('password')], 'Passwords must be the same.'),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required(),
+          email: Yup.string()
+            .email('You must provide a valid E-mail.')
+            .required('E-mail is required.'),
+          confirmEmail: Yup.string()
+            .email('You must provide a valid E-mail.')
+            .required('Confirm E-mail is required.')
+            .oneOf([Yup.ref('email')], 'E-mails must be the same.'),
+          password: Yup.string()
+            .min(6, 'Password must be at least 6 characters.')
+            .matches(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+              'Password must be at leat 6 characters, one uppercase, one lowercase and one number',
+            ),
+          confirmPassword: Yup.string()
+            .required('You must confirm your password.')
+            .oneOf([Yup.ref('password')], 'Passwords must be the same.'),
+        });
 
-      await schema.validate(data, { abortEarly: false });
+        await schema.validate(data, { abortEarly: false });
 
-      // await api.post('/users', {
-      //   name: data.name,
-      //   email: data.email,
-      //   password: data.password,
-      // });
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        await apiMobile.post('/users', {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        });
 
-        formRef.current?.setErrors(errors);
-        return;
+        Alert.alert('Sucess! ', 'Your account has been created.');
+        navigation.navigate('SignIn');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        Alert.alert(
+          'Unespected Error',
+          'Something went wrong :( try again later.',
+        );
       }
-
-      Alert.alert(
-        'Unespected Error',
-        'Something went wrong :( try again later.',
-      );
-    }
-  }, []);
+    },
+    [navigation],
+  );
 
   return (
     <>

@@ -5,7 +5,7 @@ import colors from '../../../styles/colors';
 
 interface IToast {
   type?: 'info' | 'success' | 'error';
-  hasDescription: boolean;
+  hasdescript: boolean | number;
 }
 
 const toastTypeVariations = {
@@ -23,6 +23,7 @@ const toastTypeVariations = {
   `,
 };
 
+// eslint-disable-next-line prettier/prettier
 export const ToastWrapper = styled(animated.div)<IToast>`
   width: 360px;
   position: relative;
@@ -34,7 +35,7 @@ export const ToastWrapper = styled(animated.div)<IToast>`
   ${props => toastTypeVariations[props.type || 'info']}
 
   ${props =>
-    !props.hasDescription &&
+    !props.hasdescript &&
     css`
       align-items: center;
       > svg {

@@ -32,6 +32,7 @@ import {
 } from './styles';
 
 import useKeyboadUtils from '../../hooks/keyboad';
+import { useAuth } from '../../hooks/AuthContext';
 
 interface IFormData {
   email: string;
@@ -41,37 +42,40 @@ interface IFormData {
 const SignIn: React.FC = () => {
   const { isOpenKeyboard } = useKeyboadUtils();
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   const formRef = useRef<FormHandles>(null);
   const pwInputRef = useRef<IInputRef>(null);
 
-  const handleSubmit = useCallback(async (data: IFormData) => {
-    console.log(`form`, data); //eslint-disable-line
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: IFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('You must provide a valid E-mail.')
-          .required('E-mail is required.'),
-        password: Yup.string().required('Password is required.'),
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .email('You must provide a valid E-mail.')
+            .required('E-mail is required.'),
+          password: Yup.string().required('Password is required.'),
+        });
 
-      await schema.validate(data, { abortEarly: false });
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
-        return;
+        await schema.validate(data, { abortEarly: false });
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        Alert.alert('Unespected Error', 'Check your data or try again later.');
       }
-
-      Alert.alert('Unespected Error', 'Check your data or try again later.');
-    }
-  }, []);
+    },
+    [signIn],
+  );
 
   return (
     <>

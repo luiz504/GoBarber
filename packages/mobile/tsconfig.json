@@ -6,7 +6,5 @@
     "checkJs": false,
     "jsx": "react-native"
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["src"]
 }
