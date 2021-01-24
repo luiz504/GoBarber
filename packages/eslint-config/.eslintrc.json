@@ -32,7 +32,17 @@
     "camelcase": "off",
     "@typescript-eslint/ban-types": "off",
     "class-methods-use-this": "off",
-
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ],
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
