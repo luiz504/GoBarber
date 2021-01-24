@@ -18,3 +18,18 @@
 - SOLID
 - SRP - Single Responsibility Principle
 - DIP - Dependency Inversion Principle
+
+-> Src
+config
+database
+erros
+middlewares
+models
+repositories
+routes
+services
+
+Domain -> Which the area of knowledge of that module/file
+
+DDD => Domain Driven Design (methodology)
+TDD => Test Driven Development (methodology)

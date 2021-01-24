@@ -24,7 +24,7 @@
   "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react/prop-types":"off",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
@@ -32,7 +32,18 @@
     "camelcase": "off",
     "@typescript-eslint/ban-types": "off",
     "class-methods-use-this": "off",
-
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ],
+    "no-useless-constructor": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
@@ -53,7 +64,9 @@
   },
   "settings": {
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "project": "packages/*/tsconfig.json"
+      }
     }
   }
 }

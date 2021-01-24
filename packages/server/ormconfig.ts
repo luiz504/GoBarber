@@ -5,9 +5,9 @@ export default {
   username: process.env.ORM_USERNAME,
   password: process.env.ORM_PASSWORD,
   database: process.env.ORM_DATABASE,
-  entities: ['./src/models/*.ts'],
-  migrations: ['./src/database/migrations/*.ts'],
+  entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
+  migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
   cli: {
-    migrationsDir: './src/database/migrations',
+    migrationsDir: './src/shared/infra/typeorm/migrations',
   },
 };
