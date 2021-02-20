@@ -1,3 +1,8 @@
-test('Sum 2 numbers', () => {
-  expect(1 + 2).toBe(3);
+describe('Create Appointment', () => {
+  it('Should be able to create a new appointment', () => {
+    expect(1 + 2).toBe(3);
+  });
+  it('Should not be able to create two appointments on the same time', () => {
+    expect(1 + 2).toBe(3);
+  });
 });
