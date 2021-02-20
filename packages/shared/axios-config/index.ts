@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 export const apiMobile = axios.create({
-  baseURL: 'http://192.168.0.105:3333',
+  baseURL: 'http://192.168.0.101:3333',
 });
 
 export default api;
