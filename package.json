@@ -40,9 +40,11 @@
   },
   "devDependencies": {
     "@gobarber/eslint-config": "*",
+    "@types/jest": "^26.0.20",
     "@types/styled-components": "^5.1.7",
     "@types/uuid": "^8.3.0",
     "husky": "^4.3.7",
+    "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.3",

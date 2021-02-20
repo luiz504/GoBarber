@@ -33,3 +33,29 @@ Domain -> Which the area of knowledge of that module/file
 
 DDD => Domain Driven Design (methodology)
 TDD => Test Driven Development (methodology)
+
+# Automated Testing
+
+1. Unitary Tests
+
+- Test specific features of the application (must be pure functions).
+  -- Never do API Calls or sideEffects.
+  Route => Controller => Service => Reposioty...
+
+2. Integration Tests
+
+- Test a complete Feature, passing throw many layers of the App.
+  -- Like: a SignIn or SignUp feature.
+
+3. E2E Testes (interface Test Front)
+
+- Those tests simulate the user's interaction with the app.
+  like:
+  - 1 - Click on Email Input.
+  - 2 - Fill with email@email.com.
+  - 3 - Click on Password Input.
+  - 4 - Fill with 123456.
+  - 5 - Click on Buttom Login.
+  - 6 - Espect the result and navigate to the dashboad.
+
+# TDD (Test Driven Development)
