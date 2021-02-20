@@ -2,12 +2,12 @@ import React from 'react';
 
 import { WrapperTooltip } from './styles';
 
-interface TooltipProps {
+interface ITooltipProps {
   title: string;
   className?: string;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ title, children, className }) => {
+const Tooltip: React.FC<ITooltipProps> = ({ title, children, className }) => {
   return (
     <WrapperTooltip className={className}>
       {children}
