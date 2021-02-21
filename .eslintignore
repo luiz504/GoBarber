@@ -4,3 +4,5 @@ build
 /src/react-app-env.d.ts
 /src/reportWebVitals.ts
 .eslintrc.js
+setEnvVars.ts
+.eslintignore

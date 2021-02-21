@@ -1,3 +1,8 @@
+describe('UploadUserAvatar', () => {
+  it('generic', () => {
+    expect(2 + 2).toBe(4);
+  });
+});
 // import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 // import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 // import AuthenticateUserService from './AuthenticateUser.service';

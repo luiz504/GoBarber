@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "lint-staged",
     "postinstall": "husky install",
-    "test": "yarn workspaces foreach run test"
+    "test": "jest"
   },
   "lint-staged": {
     "**/*.+(ts|tsx)": [
