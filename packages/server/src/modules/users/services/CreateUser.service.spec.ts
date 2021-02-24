@@ -3,16 +3,19 @@ import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUser.service';
 
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvicer: FakeHashProvider;
+let createUser: CreateUserService;
+
 describe('CreateUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvicer = new FakeHashProvider();
+
+    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvicer);
+  });
+
   it('should be able to create user', async () => {
-    const fakeUserRepository = new FakeUsersRepository();
-    const fakeHashProvicer = new FakeHashProvider();
-
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvicer,
-    );
-
     const userData = {
       name: 'John Doe',
       email: 'johndoe@email.com',
@@ -25,14 +28,6 @@ describe('CreateUser', () => {
   });
 
   it('should not be able to create user with alredy used email', async () => {
-    const fakeUserRepository = new FakeUsersRepository();
-    const fakeHashProvicer = new FakeHashProvider();
-
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvicer,
-    );
-
     const userData = {
       name: 'John Doe',
       email: 'johndoe@email.com',
@@ -41,6 +36,6 @@ describe('CreateUser', () => {
 
     await createUser.execute(userData);
 
-    expect(createUser.execute(userData)).rejects.toBeInstanceOf(AppError);
+    await expect(createUser.execute(userData)).rejects.toBeInstanceOf(AppError);
   });
 });

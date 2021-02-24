@@ -28,8 +28,8 @@ describe('Create Appointment', () => {
     const appointmentData = { date: new Date(), provider_id: '111111' };
 
     await createAppointment.execute(appointmentData);
-    expect(createAppointment.execute(appointmentData)).rejects.toBeInstanceOf(
-      AppError,
-    );
+    await expect(
+      createAppointment.execute(appointmentData),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

@@ -14,6 +14,7 @@
 
 **BR**
 
+- Create tokens to represent the user email and the expiration date.
 - The reset password link sent to the user, must expire in 2h;
 - The user must confirm his new password when requested;
 
