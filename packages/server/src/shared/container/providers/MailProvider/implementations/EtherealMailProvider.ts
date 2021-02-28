@@ -1,10 +1,18 @@
 import nodemailer, { Transporter } from 'nodemailer';
+import { inject, injectable } from 'tsyringe';
+import IMailTemplateProvider from '../../MailTemplateProvider/models/IMailTemplateProvider';
+
+import ISendMailDTO from '../dtos/ISendMailDTO';
 import IMailProvider from '../models/IMainProvider';
 
+@injectable()
 class EtherealMailProvider implements IMailProvider {
   private client: Transporter;
 
-  constructor() {
+  constructor(
+    @inject('MailTemplateProvider')
+    private mailTemplateProvider: IMailTemplateProvider,
+  ) {
     nodemailer.createTestAccount().then(account => {
       const traporter = nodemailer.createTransport({
         host: account.smtp.host,
@@ -20,12 +28,23 @@ class EtherealMailProvider implements IMailProvider {
     });
   }
 
-  public async sendMail(to: string, body: string): Promise<void> {
+  public async sendMail({
+    from,
+    to,
+    subject,
+    templateData,
+  }: ISendMailDTO): Promise<void> {
     const message = await this.client.sendMail({
-      from: 'GoBarber staff <staff@gobarber.com',
-      to,
-      subject: 'Recover Password',
-      text: body,
+      from: {
+        name: from?.name || 'Gobarber Staff',
+        address: from?.email || 'staff@gobarber.com',
+      },
+      to: {
+        name: to.name,
+        address: to.email,
+      },
+      subject,
+      html: await this.mailTemplateProvider.parse(templateData),
     });
 
     console.log('Message sent:', message.messageId); //eslint-disable-line

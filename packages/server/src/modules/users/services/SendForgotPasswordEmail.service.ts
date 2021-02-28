@@ -14,7 +14,7 @@ class SendForgotPasswordEmailService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-    @inject('EmailProvider')
+    @inject('MailProvider')
     private emailProvider: IMailProvider,
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
@@ -29,10 +29,20 @@ class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id);
 
-    await this.emailProvider.sendMail(
-      email,
-      `Recover password request: ${token}`,
-    );
+    await this.emailProvider.sendMail({
+      to: {
+        email: user.email,
+        name: user.name,
+      },
+      subject: 'Password Recovery',
+      templateData: {
+        template: 'Hello, {{name}}: {{token}}',
+        variables: {
+          name: user.name,
+          token,
+        },
+      },
+    });
   }
 }
 
