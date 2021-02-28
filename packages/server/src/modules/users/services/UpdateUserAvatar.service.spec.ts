@@ -16,6 +16,7 @@ describe('UpdateUserAvatar', () => {
       fakeStorageProvider,
     );
   });
+
   it("should be able to update the user's avatar", async () => {
     const userData = {
       name: 'John Doe',
@@ -32,6 +33,7 @@ describe('UpdateUserAvatar', () => {
 
     expect(updatedUser.avatar).toBe('fakeImage.jpg');
   });
+
   it('should not be able to update avatar from a non existing user', async () => {
     await expect(
       updatedUserAvatar.execute({
@@ -40,6 +42,7 @@ describe('UpdateUserAvatar', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
   it('should delete the old avatar when updating a new one', async () => {
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
 

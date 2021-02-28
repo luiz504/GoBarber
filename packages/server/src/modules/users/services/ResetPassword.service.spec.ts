@@ -1,13 +1,13 @@
 import AppError from '@shared/errors/AppError';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeUserTokenRepository from '../repositories/fakes/FakeUserTokenRepository';
 import ResetPasswordService from './ResetPassword.service';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeUsersTokensRepository: FakeUserTokenRepository;
-let resetPasswordService: ResetPasswordService;
 let hashProvider: FakeHashProvider;
+let resetPasswordService: ResetPasswordService;
 
 describe('ResetPassword', () => {
   beforeEach(() => {
