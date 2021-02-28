@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "lint-staged",
-    "postinstall": "husky install",
+    "postinstall": "husky install .config/husky",
     "test": "jest"
   },
   "lint-staged": {
