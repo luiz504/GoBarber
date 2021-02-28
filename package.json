@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "lint-staged",
-    "postinstall": "husky install",
+    "postinstall": "husky install .config/husky",
     "test": "jest"
   },
   "lint-staged": {
@@ -44,7 +44,7 @@
     "lint-staged": "^10.5.4",
     "ts-jest": "^26.5.1",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.1.3",
+    "typescript": "^4.2.2",
     "typescript-styled-plugin": "^0.15.0"
   }
 }
