@@ -1,7 +1,7 @@
 {
   "name": "@gobarber/server",
   "version": "1.0.0",
-  "main": "server.ts",
+  "main": "shared/infra/http/server/server.ts",
   "license": "MIT",
   "private": true,
   "scripts": {

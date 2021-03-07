@@ -9,10 +9,9 @@
       "request": "launch",
       "name": "Debug Server",
       "protocol": "inspector",
-      "restart": true,     
-      "skipFiles": [
-        "<node_internals>/**"
-      ],   
+      "program": "${workspaceFolder}/packages/server/package.json",
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
