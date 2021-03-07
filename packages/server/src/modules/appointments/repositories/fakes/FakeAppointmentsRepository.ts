@@ -1,19 +1,14 @@
 import { v4 } from 'uuid';
-import { isEqual } from 'date-fns';
+import { getDate, getMonth, getYear, isEqual } from 'date-fns';
 
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
+import { IFindInMouthfromProviderDTO } from '@modules/appointments/dtos/IFindInMouthfromProviderDTO';
+import { IFindInDayfromProviderDTO } from '@modules/appointments/dtos/IFindInDatfromProviderDTO';
 
 class FakeAppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = [];
-
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
-    const findAppointment = this.appointments.find(appointment =>
-      isEqual(appointment.date, date),
-    );
-    return findAppointment;
-  }
 
   public async create({
     provider_id,
@@ -26,6 +21,46 @@ class FakeAppointmentsRepository implements IAppointmentsRepository {
     this.appointments.push(appoinment);
 
     return appoinment;
+  }
+
+  public async findByDate(date: Date): Promise<Appointment | undefined> {
+    const findAppointment = this.appointments.find(appointment =>
+      isEqual(appointment.date, date),
+    );
+    return findAppointment;
+  }
+
+  public async findAllInMouthFromProvider({
+    provider_id,
+    month,
+    year,
+  }: IFindInMouthfromProviderDTO): Promise<Appointment[]> {
+    const appointments = this.appointments.filter(appointment => {
+      return (
+        appointment.provider_id === provider_id &&
+        getMonth(appointment.date) + 1 === month &&
+        getYear(appointment.date) === year
+      );
+    });
+
+    return appointments;
+  }
+
+  public async findAllInDayFromProvider({
+    provider_id,
+    day,
+    month,
+    year,
+  }: IFindInDayfromProviderDTO): Promise<Appointment[]> {
+    const appointments = this.appointments.filter(appointment => {
+      return (
+        appointment.provider_id === provider_id &&
+        getDate(appointment.date) === day &&
+        getMonth(appointment.date) + 1 === month &&
+        getYear(appointment.date) === year
+      );
+    });
+    return appointments;
   }
 }
 export default FakeAppointmentsRepository;
