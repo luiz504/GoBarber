@@ -13,8 +13,9 @@ describe('CreateAppointment', () => {
 
   it('Should be able to create a new appointment', async () => {
     const appointmentData = {
-      date: new Date(),
       provider_id: '111111',
+      user_id: '22222',
+      date: new Date(),
     };
 
     const appointment = await createAppointment.execute(appointmentData);
@@ -24,7 +25,11 @@ describe('CreateAppointment', () => {
   });
 
   it('Should not be able to create two appointments on the same time', async () => {
-    const appointmentData = { date: new Date(), provider_id: '111111' };
+    const appointmentData = {
+      provider_id: '111111',
+      user_id: '22222',
+      date: new Date(),
+    };
 
     await createAppointment.execute(appointmentData);
     await expect(
