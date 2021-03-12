@@ -61,6 +61,7 @@ class FakeAppointmentsRepository implements IAppointmentsRepository {
         getYear(appointment.date) === year
       );
     });
+
     return appointments;
   }
 }
