@@ -1,8 +1,9 @@
-import ShowUserProfileService from '@modules/users/services/ShowUserProfile.service';
-import UpdateUserProfileService from '@modules/users/services/UpdateUserProfile.service';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import User from '../../typeorm/entities/User';
+import { classToClass } from 'class-transformer';
+
+import ShowUserProfileService from '@modules/users/services/ShowUserProfile.service';
+import UpdateUserProfileService from '@modules/users/services/UpdateUserProfile.service';
 
 class ProfileController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -10,16 +11,14 @@ class ProfileController {
 
     const showUserProfile = container.resolve(ShowUserProfileService);
 
-    const user: Partial<User> = await showUserProfile.execute(id);
+    const user = await showUserProfile.execute(id);
 
-    delete user.password;
-
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;
-    const { name, email, oldPassword, password } = request.body;
+    const { name, email, old_password, password } = request.body;
 
     const updateUserProfile = container.resolve(UpdateUserProfileService);
 
@@ -27,13 +26,11 @@ class ProfileController {
       user_id: id,
       name,
       email,
-      oldPassword,
+      oldPassword: old_password,
       password,
     });
 
-    // delete user.password;
-
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }
 

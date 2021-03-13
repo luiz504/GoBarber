@@ -14,6 +14,7 @@ declare namespace NodeJS {
 
     TOKEN_SECRET: string | number;
     TOKEN_EXPIRATION: string;
+    APP_API_URL: string;
     APP_WEB_URL: string;
   }
 }
