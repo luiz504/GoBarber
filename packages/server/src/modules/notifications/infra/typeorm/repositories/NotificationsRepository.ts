@@ -20,6 +20,8 @@ class NotificationsRepository implements INotificationsRepository {
       recipient_id,
     });
 
+    this.ormRepository.save(notification);
+
     return notification;
   }
 }
