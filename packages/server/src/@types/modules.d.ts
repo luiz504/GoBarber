@@ -16,5 +16,6 @@ declare namespace NodeJS {
     TOKEN_EXPIRATION: string;
     APP_API_URL: string;
     APP_WEB_URL: string;
+    MAIL_DRIVER: string;
   }
 }
