@@ -16,6 +16,10 @@ declare namespace NodeJS {
     TOKEN_EXPIRATION: string;
     APP_API_URL: string;
     APP_WEB_URL: string;
-    MAIL_DRIVER: string;
+    MAIL_DRIVER: 'ethereal' | 'ses';
+    STORAGE_DRIVER: 'local' | 's3';
+    AWS_DEFAULT_REGION: string;
+    AWS_BUCKET: string;
+    AWS_BUCKET_URL: string;
   }
 }
