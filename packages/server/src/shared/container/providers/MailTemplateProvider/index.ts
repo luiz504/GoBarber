@@ -3,11 +3,11 @@ import { container } from 'tsyringe';
 import HandlebarsMailTemplateProvider from './implementations/HandlebarsMailTemplateProvider';
 import IMailTemplateProvider from './models/IMailTemplateProvider';
 
-const templates = {
+const providers = {
   default: HandlebarsMailTemplateProvider,
 };
 
 container.registerSingleton<IMailTemplateProvider>(
   'MailTemplateProvider',
-  templates.default,
+  providers.default,
 );
