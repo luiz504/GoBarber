@@ -2,18 +2,17 @@ import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import AuthenticateUserService from './AuthenticateUser.service';
-import CreateUserService from './CreateUser.service';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvicer: FakeHashProvider;
-let createUser: CreateUserService;
+
 let authenticateUser: AuthenticateUserService;
 
 describe('AuthenticateUser', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvicer = new FakeHashProvider();
-    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvicer);
+
     authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvicer,
@@ -27,7 +26,7 @@ describe('AuthenticateUser', () => {
       password: '123456',
     };
 
-    const user = await createUser.execute(userData);
+    const user = await fakeUsersRepository.create(userData);
 
     const auth = await authenticateUser.execute({
       email: userData.email,
@@ -60,7 +59,7 @@ describe('AuthenticateUser', () => {
       password: '123456',
     };
 
-    await createUser.execute(userData);
+    await fakeUsersRepository.create(userData);
 
     await expect(
       authenticateUser.execute({

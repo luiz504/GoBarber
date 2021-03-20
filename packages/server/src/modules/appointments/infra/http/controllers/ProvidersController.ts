@@ -1,7 +1,8 @@
-import ListProvidersService from '@modules/appointments/services/ListProviders.service';
-import User from '@modules/users/infra/typeorm/entities/User';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
+
+import ListProvidersService from '@modules/appointments/services/ListProviders.service';
 
 class ProvidersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -13,13 +14,9 @@ class ProvidersController {
       user_id,
     });
 
-    const providersNoPw = providers.map(provider => {
-      const providerClone: Partial<User> = provider;
-      delete providerClone.password;
-      return providerClone;
-    });
+    const providersParsed = providers.map(provider => classToClass(provider));
 
-    return response.json(providersNoPw);
+    return response.json(providersParsed);
   }
 }
 
